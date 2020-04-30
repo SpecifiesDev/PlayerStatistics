@@ -46,6 +46,28 @@ public class ExperienceCommand implements CommandExecutor {
 				
 				if(p.hasPermission("playerstatistics.xp.others")) {
 					
+					GamePlayer player = new GamePlayer(args[0]);
+					
+					if(!player.exists()) {
+						p.sendMessage(plugin.color("&cThis player does not exist."));
+					} else {
+						player.update(p);
+						
+						int level = player.getLevel();
+						int xp = (int) player.getXP();
+						
+						System.out.println(xp + "\n" + player.calculateEndOfLevelXP(level + 1));
+
+						
+						p.sendMessage(plugin.color("&8&m-------------&7[ &bLevel &6" + Integer.toString(level) +  " &a" + args[0] + " &7]&8&m------------"));
+						p.sendMessage("");
+						p.sendMessage(plugin.color("&c&l" + Integer.toString(xp) + "&7/&c&l" + Integer.toString((int) player.calculateEndOfLevelXP(level + 1)) + " &8&l[" + new ProgressionBar().getProgressBar(xp, (int) player.calculateEndOfLevelXP(level + 1), 42, '|', ChatColor.AQUA, ChatColor.GRAY) + "&8&l]"));
+						p.sendMessage("");
+						p.sendMessage(plugin.color("&8&m---------------------------------------"));						
+					}
+					
+
+					
 				} else p.sendMessage(plugin.color("&cYou do not have permission to check the experience of other players."));
 				
 			}
