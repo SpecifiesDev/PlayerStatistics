@@ -25,7 +25,7 @@ public class GamePlayer {
 		this.player = player;
 		this.plugin = Main.getInstance();
 		
-		path = new File(this.plugin.getDataFolder() + "\\data\\" + this.getPlayer().getUniqueId() + ".yml");
+		path = new File(this.plugin.getDataFolder() + File.separator + "data" + File.separator + this.getPlayer().getUniqueId() + ".yml");
 		playerConfig = YamlConfiguration.loadConfiguration(path);
 		
 		

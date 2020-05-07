@@ -31,6 +31,8 @@ public class ExperienceCommand implements CommandExecutor {
 					
 					int level = player.getLevel();
 					int xp = (int) player.getXP();
+
+					if(level > plugin.getMaxLevel()) level = plugin.getMaxLevel();
 					
 					System.out.println(xp + "\n" + player.calculateEndOfLevelXP(level + 1));
 
@@ -55,9 +57,8 @@ public class ExperienceCommand implements CommandExecutor {
 						
 						int level = player.getLevel();
 						int xp = (int) player.getXP();
-						
-						System.out.println(xp + "\n" + player.calculateEndOfLevelXP(level + 1));
 
+						if(level > plugin.getMaxLevel()) level = plugin.getMaxLevel();
 						
 						p.sendMessage(plugin.color("&8&m-------------&7[ &bLevel &6" + Integer.toString(level) +  " &a" + args[0] + " &7]&8&m------------"));
 						p.sendMessage("");

@@ -27,6 +27,7 @@ public class Main extends JavaPlugin {
 	private File dataDirectory = new File(this.getDataFolder() + "\\data");
 	private ArrayList<String> achievements = new ArrayList<>(Arrays.asList("10-kills-m", "20-kills-m"));
 	private DataServer proxy = null;
+	private int maxLevel;
 	private static Main instance;
 	
 	public void onEnable() {
@@ -47,6 +48,11 @@ public class Main extends JavaPlugin {
 			this.proxy = new DataServer(this.config().getInt("port"), this.getServer().getPort());
 			
 		}
+		
+		int tempLevel = this.config().getInt("max-level");
+		if(tempLevel > 250) tempLevel = 250;
+		
+		this.maxLevel = tempLevel;
 	
 		// Register events and commands
 		registerCommands();
@@ -69,7 +75,9 @@ public class Main extends JavaPlugin {
 		return achievements;
 	}
 
-	
+	public int getMaxLevel() {
+		return this.maxLevel;
+	}
 	
 	private void grabAchievementConfig() {
 		
@@ -104,7 +112,7 @@ public class Main extends JavaPlugin {
 		
 		getCommand("stats").setExecutor(new StatCommand());
 		getCommand("xp").setExecutor(new ExperienceCommand());
-		getCommand("xpbylevel").setExecutor(new ReturnXPByLevel());
+		getCommand("levels").setExecutor(new ReturnXPByLevel());
 		
 	}
 	
